@@ -1,3 +1,8 @@
+/*
+ * SSTFCalculator
+ * Calculate the distance travelled for the Shortest Seek Time First disk scheduling algorithm
+ */
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
