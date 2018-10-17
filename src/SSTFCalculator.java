@@ -59,7 +59,7 @@ public class SSTFCalculator {
 	}
 	
 	public static void main(String[] args) {
-		new SSTFCalculator().run(1167, new int[] {1045, 750, 932, 878, 1365, 1787, 1245, 664, 1678, 1897});
+		new SSTFCalculator().run(1167, new int[] {1045, 750, 932, 878, 1365, 1787, 1245, 664, 1678, 1897}); //some data
 	}
 	
 }
