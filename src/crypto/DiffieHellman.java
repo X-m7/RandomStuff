@@ -8,7 +8,14 @@ import java.util.List;
 public class DiffieHellman {
 
 	public BigInteger genP(int bits) {
-		return BigInteger.probablePrime(bits, new SecureRandom());
+		SecureRandom r = new SecureRandom();
+		while (true) { //need to make sure it is a safe prime (if p = 2q+1 and q is also prime)
+			BigInteger q = BigInteger.probablePrime(bits, r);
+			BigInteger p = (q.multiply(new BigInteger("2"))).add(BigInteger.ONE);
+			if (p.isProbablePrime(100)) {
+				return p;
+			}
+		}
 	}
 	
 	public BigInteger genG(BigInteger p) {
@@ -65,7 +72,7 @@ public class DiffieHellman {
 	
 	public static void main(String[] args) {
 		DiffieHellman dh = new DiffieHellman();
-		BigInteger p = dh.genP(64);
+		BigInteger p = dh.genP(32);
 		System.out.println(p);
 		System.out.println(dh.genG2(p));
 		System.out.println(dh.genG(p));
