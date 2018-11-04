@@ -17,6 +17,10 @@ public class Node<T> {
 	public T getValue() {
 		return value;
 	}
+	
+	public void setValue(T value) {
+		this.value = value;
+	}
 
 	public List<Node<T>> getAdjacentNodes() {
 		return Collections.unmodifiableList(adjacentNodes);
