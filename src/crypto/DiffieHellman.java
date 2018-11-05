@@ -48,21 +48,6 @@ public class DiffieHellman {
 		}
 	}
 	
-	public boolean isPrimRoot(BigInteger a, BigInteger p) {
-		BigInteger phi = p.subtract(BigInteger.ONE);
-		byte b[] = new byte[1];
-		b[0] = 2;
-		for (BigInteger i = new BigInteger(b); i.compareTo(phi) == -1; i = i.nextProbablePrime()) {
-			if (phi.mod(i).compareTo(BigInteger.ZERO) != 0) {
-				continue;
-			}
-			if (a.modPow(phi.divide(i), p).compareTo(BigInteger.ONE) == 0) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
 	public static void main(String[] args) {
 		DiffieHellman dh = new DiffieHellman();
 		BigInteger p = dh.genP(32);
