@@ -33,7 +33,11 @@ public class DiffieHellman {
 		if (n.compareTo(BigInteger.ONE) > 0) {
 			factors.add(n);
 		}
-		for (BigInteger out = BigInteger.ONE.add(BigInteger.ONE); out.compareTo(p) <= 0; out = out.add(BigInteger.ONE)) {
+		SecureRandom rng = new SecureRandom();
+		for (BigInteger out = new BigInteger(p.bitLength(), rng);;out = new BigInteger(p.bitLength(), rng)) {
+			if (out.equals(new BigInteger("2")) || out.compareTo(p) > 0) {
+				continue;
+			}
 			boolean ok = true;
 			for (int i = 0; i < factors.size() && ok; i++) {
 				ok &= !out.modPow(phi.divide(factors.get(i)), p).equals(BigInteger.ONE);
@@ -42,7 +46,6 @@ public class DiffieHellman {
 				return out;
 			}
 		}
-		return null;
 	}
 	
 	public boolean isPrimRoot(BigInteger a, BigInteger p) {
@@ -60,21 +63,10 @@ public class DiffieHellman {
 		return true;
 	}
 	
-	public BigInteger genG2(BigInteger p) {
-		byte b[] = new byte[1];
-		b[0] = 2;
-		BigInteger generator = new BigInteger(b);
-		while (!isPrimRoot(generator, p) && generator.compareTo(p) < 1) {
-			generator = generator.add(BigInteger.ONE);
-		}
-		return generator;
-	}
-	
 	public static void main(String[] args) {
 		DiffieHellman dh = new DiffieHellman();
 		BigInteger p = dh.genP(32);
 		System.out.println(p);
-		System.out.println(dh.genG2(p));
 		System.out.println(dh.genG(p));
 	}
 }
