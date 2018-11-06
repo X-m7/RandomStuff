@@ -50,8 +50,11 @@ public class DiffieHellman {
 	
 	public static void main(String[] args) {
 		DiffieHellman dh = new DiffieHellman();
-		BigInteger p = dh.genP(32);
+		BigInteger p = dh.genP(40);
 		System.out.println(p);
-		System.out.println(dh.genG(p));
+		BigInteger g = dh.genG(p);
+		System.out.println(g);
+		System.out.println(g.modPow(new BigInteger("11"), p).modPow(new BigInteger("22"), p));
+		System.out.println(g.modPow(new BigInteger("22"), p).modPow(new BigInteger("11"), p));
 	}
 }
