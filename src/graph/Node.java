@@ -29,4 +29,9 @@ public class Node<T> {
 	public void addAdjacentNode(Node<T> node) {
 		adjacentNodes.add(node);
 	}
+	
+	@Override
+	public String toString() {
+		return value.toString();
+	}
 }
